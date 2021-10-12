@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>net.daktic</groupId>
+		<artifactId>EBank-V1-JEE-EJB3</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>EBank-V1-JEE-EJB3-Remoteclient</artifactId>
+
+	<name>Archetype - EBank-V1-JEE-EJB3-Remoteclient</name>
+	<url>http://maven.apache.org</url>
+
+
+	<!-- PROPERTIES -->
+	<!-- ============================================================================================== -->
+
+
+
+	<!-- DEPENDENCY Managment -->
+	<!-- ============================================================================================== -->
+	<dependencyManagement>
+		<dependencies>
+			<!-- Define the version of JBoss' Java EE 6 APIs we want to use -->
+			<!-- JBoss distributes a complete set of Java EE 6 APIs including a Bill 
+				of Materials (BOM). A BOM specifies the versions of a "stack" (or a collection) 
+				of artifacts. We use this here so that we always get the correct versions 
+				of artifacts. Here we use the jboss-javaee-6.0 stack (you can read this as 
+				the JBoss stack of the Java EE 6 APIs). You can actually use this stack with 
+				any version of JBoss AS that implements Java EE 6, not just JBoss AS 7! -->
+			<dependency>
+				<groupId>org.jboss.spec</groupId>
+				<artifactId>jboss-javaee-6.0</artifactId>
+				<version>${version.org.jboss.spec.jboss.javaee.6.0}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jboss.as</groupId>
+				<artifactId>jboss-as-ejb-client-bom</artifactId>
+				<version>${version.org.jboss.as}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<!-- DEPENDENCIES -->
+	<!-- ============================================================================================== -->
+	<dependencies>
+
+		<!-- We depend on the EJB remote business interfaces of this application -->
+		<dependency>
+			<groupId>${project.parent.groupId}</groupId>
+			<artifactId>EBank-V1-JEE-EJB3-core</artifactId>
+			<!-- <type>ejb-client</type> -->
+			<version>${project.parent.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>6.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+	</dependencies>
+
+	<!-- PLUGIN -->
+	<!-- ============================================================================================== -->
+
+	<build>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<!-- Add the maven exec plugin to allow us to run a java program via maven -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>${version.exec.plugin}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<executable>java</executable>
+					<workingDirectory>${project.build.directory}/exec-working-directory</workingDirectory>
+					<arguments>
+
+						<!-- automatically creates the classpath using all project dependencies, 
+							also adding the project build directory -->
+
+						<argument>-classpath</argument>
+						<classpath>
+						</classpath>
+						<argument>example.ejb3.Client</argument>
+					</arguments>
+				</configuration>
+			</plugin>
+		</plugins>
+
+	</build>
+
+</project>

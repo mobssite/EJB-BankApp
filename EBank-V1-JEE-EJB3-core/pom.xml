@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>net.daktic</groupId>
+		<artifactId>EBank-V1-JEE-EJB3</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>EBank-V1-JEE-EJB3-core</artifactId>
+	<packaging>ejb</packaging>
+	<name>Archetype - EBank-V1-JEE-EJB3-core</name>
+
+	<!-- TO DEPLOY -->
+	<!-- ============================================================================================== -->
+	<!-- Deploy EJB3 JAR in JBoss AS -->
+	<!-- Method 1: using [jboss-as:deploy] maven goal after server started -->
+
+
+	<!-- PROPERTIES -->
+	<!-- ============================================================================================== -->
+	<properties>
+		<!-- Optional: to use jboss-as:run goal -->
+		<jboss-as.home>C:\DevTools\jboss\jboss-as-7.1.1.Final</jboss-as.home>
+		<jboss.home>${jboss-as.home}</jboss.home>
+		<jboss.domain>default</jboss.domain>
+		<jboss.version>7.1.1.Final</jboss.version>
+	</properties>
+
+
+	<!-- DEPENDENCY Managment -->
+	<!-- ============================================================================================== -->
+
+
+	<!-- REPO -->
+	<!-- ============================================================================================== -->
+
+
+	<!-- DEPENDENCIES -->
+	<!-- ============================================================================================== -->
+	<dependencies>
+		<!-- <dependency> -->
+		<!-- <groupId>org.jboss.spec</groupId> -->
+		<!-- <artifactId>jboss-javaee-6.0</artifactId> -->
+		<!-- <version>3.0.3.Final</version> -->
+		<!-- <scope>provided</scope> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.glassfish</groupId> -->
+		<!-- <artifactId>javaee-api</artifactId> -->
+		<!-- <version>3.1.1</version> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>6.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- tetst -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<!-- PLUGIN -->
+	<!-- ============================================================================================== -->
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<!-- Set the name of the deployment -->
+			<!-- JBoss AS plugin used to deploy, redeploy, undeploy or run your application 
+				in JBoss AS -->
+			<plugin>
+				<groupId>org.jboss.as.plugins</groupId>
+				<artifactId>jboss-as-maven-plugin</artifactId>
+				<version>${version.org.jboss.as.plugins.maven.plugin}</version>
+				<configuration>
+					<filename>${project.build.finalName}.jar</filename>
+				</configuration>
+			</plugin>
+			<!-- generates J2EE Enterprise Javabean (EJB) file as well as the associated 
+				client jar -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ejb-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<ejbVersion>3.1</ejbVersion>
+					<generateClient>true</generateClient>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

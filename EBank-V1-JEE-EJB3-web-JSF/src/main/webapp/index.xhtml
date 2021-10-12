@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<f:view encoding="UTF-8"
+	xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <html>
+
+    <h:head>
+    </h:head>
+
+	<!-- ACCESS :  http://localhost:8080/EBank-V1-JEE-EJB3-web-JSF/faces/index.xhtml -->
+    <h:body>
+    
+    <div>
+    <h:form>
+    	<h:panelGrid columns="2">
+    		
+    		<h:outputText value="Numero compte Emetteur" />
+    		<h:inputText value="#{banqueManagedBean.numeroCompteEmetteur}" />
+    		
+    		<h:outputText value="Numero Compte Recepteur" />
+    		<h:inputText value="#{banqueManagedBean.numeroCompteCible}" />
+    		
+    		<h:outputText value="Montant Transfert" />
+    		<h:inputText value="#{banqueManagedBean.montant}" />
+    		
+<!--     		<h:commandButton action="#{banqueManagedBean.verser}" value="Verser"></h:commandButton> -->
+<!--     		<h:commandButton action="#{banqueManagedBean.retirer}" value="Retirer" /> -->
+<!--     		<h:commandButton action="#{banqueManagedBean.virement}" value="Virement" /> -->
+<!--     		<h:commandButton action="#{banqueManagedBean.ajouter}" value="Ajouter Compte" /> -->
+    		
+    	</h:panelGrid>
+    </h:form>
+    </div>
+    <div>
+    	<h:dataTable value="#{banqueManagedBean.listComptes}" var="cp" classe="table1">
+    		<h:column>
+    			<f:facet name="header">
+    				<h:outputText value="NUMERO COMPTE" />
+    			</f:facet>
+    			<h:outputText value="#{cp.numeroCompte}" />
+    		</h:column>
+    		<h:column>
+    			<f:facet name="header">
+    				<h:outputText value="SOLDE" />
+    			</f:facet>
+    			<h:outputText value="#{cp.solde}" />
+    		</h:column>
+    		<h:column>
+    			<f:facet name="header">
+    				<h:outputText value="DATE CREATION" />
+    			</f:facet>
+    			<h:outputText value="#{cp.dateCreation}" />
+    		</h:column>
+    		<h:column>
+    			<f:facet name="header">
+    				<h:outputText value="ACTIVE" />
+    			</f:facet>
+    			<h:outputText value="#{cp.active}" />
+    		</h:column>
+    	</h:dataTable>
+    </div>
+
+        <h1>Welcome to JSF spring boot tutorial</h1>
+
+        <h3>#{jsfBean.welcomeMessage}</h3>
+        <h3>#{jsfSpringBean.welcomeMessage}</h3>
+
+        
+    </h:body>
+
+    </html>
+</f:view>
